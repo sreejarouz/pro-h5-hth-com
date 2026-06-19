@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>hth 产品说明 – 稳定入口与页面结构</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f9fc;
+            color: #1a2a3a;
+            line-height: 1.65;
+            padding: 0 1rem 3rem;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* hero 区域 */
+        .hero {
+            padding: 3.5rem 0 2rem;
+            text-align: center;
+            border-bottom: 1px solid #d0e4eb;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0b3b4a;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3fb5a0, #2f8b7a);
+            margin: 0.5rem auto 0;
+            border-radius: 6px;
+        }
+
+        .hero p {
+            margin-top: 1.25rem;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #2f4a58;
+            font-size: 1.05rem;
+        }
+
+        /* 网格卡片体系 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.5rem 1.2rem;
+            box-shadow: 0 6px 14px rgba(44, 130, 120, 0.06), 0 2px 6px rgba(0,30,30,0.03);
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            border: 1px solid #ddeff0;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 22px rgba(43, 120, 112, 0.10);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #135c5a;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .card h3 span {
+            background: #d5f0ea;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #0f5f56;
+            margin-right: 0.2rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #2a404a;
+            margin-bottom: 0.3rem;
+        }
+
+        .card .meta {
+            font-size: 0.85rem;
+            color: #4f6d79;
+            border-top: 1px solid #e6f1f0;
+            padding-top: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        /* 摘要 + 使用建议区块 */
+        .section-block {
+            background: #edf7f5;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0 1.2rem;
+            border-left: 6px solid #31a692;
+        }
+
+        .section-block h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #0a4341;
+            margin-bottom: 1rem;
+        }
+
+        .section-block p {
+            color: #1c3b44;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-block ul {
+            list-style: none;
+            padding-left: 0.2rem;
+        }
+
+        .section-block li {
+            padding: 0.35rem 0 0.35rem 1.6rem;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2331a692" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>') left center no-repeat;
+            background-size: 14px;
+            margin-bottom: 0.25rem;
+        }
+
+        /* FAQ 摘要 — 简洁折叠风格 */
+        .faq-mini {
+            margin: 2.5rem 0 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 18px;
+            padding: 0.9rem 1.4rem;
+            border: 1px solid #cbe3e0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .faq-item summary {
+            font-weight: 500;
+            color: #175b58;
+            cursor: default;
+            font-size: 1rem;
+        }
+
+        .faq-item p {
+            margin-top: 0.4rem;
+            color: #2f4d57;
+            font-size: 0.92rem;
+            padding-left: 0.1rem;
+        }
+
+        /* 可信说明区域 — 克制风格 */
+        .notice-credible {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 4px 12px rgba(44, 130, 120, 0.04);
+            border: 1px solid #d2eae6;
+            margin: 2rem 0 1rem;
+        }
+
+        .notice-credible h3 {
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: #0b524b;
+            margin-bottom: 0.6rem;
+        }
+
+        .notice-credible p {
+            color: #2b4b55;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .notice-credible .tag {
+            display: inline-block;
+            background: #daf0ea;
+            color: #105f57;
+            border-radius: 30px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+
+        /* 链接嵌入句子样式 */
+        .inline-link {
+            color: #1b7a6b;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dashed #5bb8a8;
+            transition: border 0.15s, color 0.15s;
+        }
+
+        .inline-link:hover {
+            color: #0c5d50;
+            border-bottom: 1px solid #1f8877;
+        }
+
+        /* 尾部 */
+        .footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #597b82;
+            border-top: 1px solid #d3e7e4;
+            padding-top: 1.8rem;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 500px) {
+            .hero h1 { font-size: 1.75rem; }
+            .section-block, .notice-credible { padding: 1.3rem 1.2rem; }
+            .grid-cards { gap: 1rem; }
+            .card { padding: 1.2rem 1rem; }
+        }
+
+        @media (min-width: 700px) {
+            .hero { padding: 4rem 0 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- hero -->
+    <header class="hero">
+        <h1>hth · 产品说明</h1>
+        <p>从稳定的入口到清晰的页面结构，<a href="https://pro-h5-hth.com" class="inline-link">hth</a> 为日常使用提供一致的访问路径和信息层级。以下概述重点功能与使用建议。</p>
+    </header>
+
+    <!-- 网格卡片：亮点 + 特点 -->
+    <div class="grid-cards">
+        <div class="card">
+            <h3><span>①</span> 页面结构</h3>
+            <p>采用分区式布局，标题区、导航区、内容区层级分明。信息流由主到次，减少认知负荷。</p>
+            <div class="meta">适合快速定位</div>
+        </div>
+        <div class="card">
+            <h3><span>②</span> 稳定入口</h3>
+            <p>通过统一资源标识调用页面，长期保持可访问性。域名解析与CDN边缘节点持续优化。</p>
+            <div class="meta">低波动性</div>
+        </div>
+        <div class="card">
+            <h3><span>③</span> 响应适应</h3>
+            <p>基于 viewport 与弹性布局，在手机、平板及宽屏下均能保持易读的卡片与文字节奏。</p>
+            <div class="meta">多终端一致</div>
+        </div>
+        <div class="card">
+            <h3><span>④</span> 信息密度</h3>
+            <p>主内容区字间距、行高与色块分割经过平衡，长段落可被自然分组，利于浏览型阅读。</p>
+            <div class="meta">知识型展示</div>
+        </div>
+    </div>
+
+    <!-- 摘要 + 使用建议 -->
+    <div class="section-block">
+        <h2>摘要与使用建议</h2>
+        <p>从稳定入口的角度看，<a href="https://pro-h5-hth.com" class="inline-link">hth</a> 页面以组件化卡片承载主要说明，降低首次理解门槛。建议使用者优先浏览顶部摘要，再根据兴趣深入具体模块。</p>
+        <ul>
+            <li><strong>新用户</strong> — 先阅读 hero 区域概述，了解页面定位与功能边界。</li>
+            <li><strong>常规用户</strong> — 利用网格卡片快速获取各要点，点击相关链接延伸阅读。</li>
+            <li><strong>长时访问</strong> — 可借助浏览器书签直接固定 URL，减少中间跳转步骤。</li>
+        </ul>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <div class="faq-item">
+            <summary>❓ 如何确保每次访问都是同一页面结构？</summary>
+            <p>静态资源与路由采用固定路径，无动态参数干扰。浏览器缓存策略也辅助维持布局稳定。</p>
+        </div>
+        <div class="faq-item">
+            <summary>❓ 页面中的链接指向哪里？</summary>
+            <p>核心链接指向 <a href="https://pro-h5-hth.com" class="inline-link">hth</a> 主资源地址，用于获取完整产品界面。文中其他引用均为说明性示例。</p>
+        </div>
+        <div class="faq-item">
+            <summary>❓ 移动端下卡片布局会变形吗？</summary>
+            <p>卡片采用 min-width 自适应网格，在 320px 宽度以上均能保持两列或单列展示，字体与间距同步缩放。</p>
+        </div>
+    </div>
+
+    <!-- 可信但克制的访问说明 -->
+    <div class="notice-credible">
+        <h3>📌 访问说明</h3>
+        <p><span class="tag">客观描述</span> 本页面仅为产品结构展示，不包含个人数据收集或自动跳转。所有链接均指向同一受控域名 <a href="https://pro-h5-hth.com" class="inline-link">hth</a> ，无第三方外链。</p>
+        <p><span class="tag">访问建议</span> 建议使用主流浏览器（Chrome / Safari / Firefox 最新版本）以获得最佳网格与卡片渲染效果。页面未使用过量脚本，首屏加载以静态样式为主。</p>
+        <p style="margin-top:0.7rem; font-size:0.88rem; color:#3e6b70;">— 本说明保持克制，不罗列未经证实的性能数据，仅基于当前页面实际表现。</p>
+    </div>
+
+    <!-- 结尾 -->
+    <div class="footer-note">
+        <p>内容基于产品页面实际结构撰写 · 版本说明 2025</p>
+        <p style="margin-top:0.3rem;">通过 <a href="https://pro-h5-hth.com" class="inline-link">hth</a> 可获取完整界面与交互细节</p>
+    </div>
+</div>
+</body>
+</html>

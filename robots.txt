@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sreejarouz.github.io/pro-h5-hth-com/sitemap.xml
